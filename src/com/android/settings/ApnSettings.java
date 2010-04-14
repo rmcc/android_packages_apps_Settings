@@ -150,7 +150,8 @@ public class ApnSettings extends PreferenceActivity implements
             + "\"";
 
         Cursor cursor = managedQuery(Telephony.Carriers.CONTENT_URI, new String[] {
-                "_id", "name", "apn", "type"}, where,
+                //"_id", "name", "apn", "type"}, where,
+                "_id", "name", "apn", "type"}, "",
                 Telephony.Carriers.DEFAULT_SORT_ORDER);
 
         PreferenceGroup apnList = (PreferenceGroup) findPreference("apn_list");
