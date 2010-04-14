@@ -38,6 +38,12 @@
             android:persistent="false"
             android:summary="@string/use_location_summary"/>
 
+        <CheckBoxPreference
+            android:key="assisted_gps"
+            android:title="@string/assisted_gps"
+            android:summaryOn="@string/assisted_gps_enabled"
+            android:summaryOff="@string/assisted_gps_disabled"/>
+
     </PreferenceCategory>
             
 </PreferenceScreen>
