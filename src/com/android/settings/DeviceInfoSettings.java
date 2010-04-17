@@ -61,6 +61,7 @@ public class DeviceInfoSettings extends PreferenceActivity {
         setStringSummary("device_model", Build.MODEL);
         setStringSummary("build_number", Build.DISPLAY);
         findPreference("kernel_version").setSummary(getFormattedKernelVersion());
+	setValueSummary("mod_version", "ro.modversion");
 
         // Remove Safety information preference if PROPERTY_URL_SAFETYLEGAL is not set
         removePreferenceIfPropertyMissing(getPreferenceScreen(), "safetylegal",
@@ -140,7 +141,8 @@ public class DeviceInfoSettings extends PreferenceActivity {
                 "\\w+\\s+" + /* ignore: version */
                 "([^\\s]+)\\s+" + /* group 1: 2.6.22-omap1 */
                 "\\(([^\\s@]+(?:@[^\\s.]+)?)[^)]*\\)\\s+" + /* group 2: (xxxxxx@xxxxx.constant) */
-                "\\(.*?(?:\\(.*?\\)).*?\\)\\s+" + /* ignore: (gcc ..) */
+                //"\\(.*?(?:\\(.*?\\)).*?\\)\\s+" + /* ignore: (gcc ..) */
+		"\\([^)]+\\)\\s+" + /* ignore: (gcc ..) */
                 "([^\\s]+)\\s+" + /* group 3: #26 */
                 "(?:PREEMPT\\s+)?" + /* ignore: PREEMPT (optional) */
                 "(.+)"; /* group 4: date */
