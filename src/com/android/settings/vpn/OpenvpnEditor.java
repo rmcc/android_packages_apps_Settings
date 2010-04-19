@@ -67,44 +67,51 @@ class OpenvpnEditor extends VpnProfileEditor {
     protected void loadExtraPreferencesTo(PreferenceGroup subpanel) {
         final Context c = subpanel.getContext();
         final OpenvpnProfile profile = (OpenvpnProfile) getProfile();
-        mUserAuth = new CheckBoxPreference(c);
-        mUserAuth.setTitle(R.string.vpn_openvpn_userauth);
-        mUserAuth.setSummary(R.string.vpn_openvpn_userauth_summary);
-        mUserAuth.setChecked(profile.getUserAuth());
-        mUserAuth.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            public boolean onPreferenceChange(Preference pref, Object newValue) {
-                boolean enabled = (Boolean) newValue;
-                profile.setUserAuth(enabled);
-                mUserAuth.setChecked(enabled);
-                return true;
-            }
-        });
-        subpanel.addPreference(mUserAuth);
-        mCACert = createList(c, R.string.vpn_ca_certificate_title, profile.getCAName(), mKeyStore
-                .saw(Credentials.CA_CERTIFICATE), new Preference.OnPreferenceChangeListener() {
-            public boolean onPreferenceChange(Preference pref, Object newValue) {
-                String f = (String) newValue;
-                profile.setCAName(f);
-                setSummary(mCACert, R.string.vpn_ca_certificate, profile.getCAName());
+	mUserAuth = new CheckBoxPreference(c);
+	mUserAuth.setTitle(R.string.vpn_openvpn_userauth);
+	mUserAuth.setSummary(R.string.vpn_openvpn_userauth_summary);
+	mUserAuth.setChecked(profile.getUserAuth());
+	mUserAuth.setOnPreferenceChangeListener(
+            new Preference.OnPreferenceChangeListener() {
+	        public boolean onPreferenceChange(
+                    Preference pref, Object newValue) {
+		    boolean enabled = (Boolean) newValue;
+		    profile.setUserAuth(enabled);
+		    mUserAuth.setChecked(enabled);
+		    return true;
+		}
+	    });
+	subpanel.addPreference(mUserAuth);
+	mCACert = createList(c, R.string.vpn_user_certificate_title,
+            profile.getCAName(),
+	    CertTool.getInstance().getAllCaCertificateKeys(),
+            new Preference.OnPreferenceChangeListener() {
+		public boolean onPreferenceChange(Preference pref, Object newValue) {
+		    String f = (String) newValue;
+		    profile.setCAName(f);
+		    setSummary(mCACert, R.string.vpn_ca_certificate, 
+			       profile.getCAName());
 
-                return true;
-            }
-        });
-        setSummary(mCACert, R.string.vpn_ca_certificate, profile.getCAName());
-        subpanel.addPreference(mCACert);
+		    return true;
+		}           
+	    });
+	setSummary(mCACert, R.string.vpn_ca_certificate, profile.getCAName());
+	subpanel.addPreference(mCACert);
+ 	mCert = createList(c, R.string.vpn_ca_certificate_title,
+            profile.getCertName(),
+            CertTool.getInstance().getAllUserCertificateKeys(),
+            new Preference.OnPreferenceChangeListener() {
+		public boolean onPreferenceChange(Preference pref, Object newValue) {
+		    String f = (String) newValue;
+		    profile.setCertName(f);
+		    setSummary(mCert, R.string.vpn_ca_certificate,
+			       profile.getCertName());
 
-        mCert = createList(c, R.string.vpn_user_certificate_title, profile.getCertName(), mKeyStore
-                .saw(Credentials.USER_CERTIFICATE), new Preference.OnPreferenceChangeListener() {
-            public boolean onPreferenceChange(Preference pref, Object newValue) {
-                String f = (String) newValue;
-                profile.setCertName(f);
-                setSummary(mCert, R.string.vpn_user_certificate, profile.getCertName());
-
-                return true;
-            }
-        });
-        setSummary(mCert, R.string.vpn_user_certificate, profile.getCertName());
-        subpanel.addPreference(mCert);
+		    return true;
+		}           
+	    });
+	setSummary(mCert, R.string.vpn_ca_certificate, profile.getCertName());
+	subpanel.addPreference(mCert);
     }
 
     @Override
