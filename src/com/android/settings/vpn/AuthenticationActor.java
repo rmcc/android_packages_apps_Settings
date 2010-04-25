@@ -117,7 +117,7 @@ public class AuthenticationActor implements VpnProfileActor {
         return mContext;
     }
 
-    protected void connect(final String username, final String password) {
+    private void connect(final String username, final String password) {
         mVpnManager.startVpnService();
         ServiceConnection c = new ServiceConnection() {
             public void onServiceConnected(ComponentName className,
