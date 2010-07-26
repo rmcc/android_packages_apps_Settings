@@ -186,7 +186,7 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         
         ImageView gaugeImage = (ImageView) findViewById(R.id.gauge);
         mGauge = new PercentageBar();
-        mGauge.percent = gaugeValue;
+        mGauge.percent = percentage; //gaugeValue; - GPO: gaugeValue is too high
         mGauge.bar = getResources().getDrawable(R.drawable.app_gauge);
         gaugeImage.setImageDrawable(mGauge);
 

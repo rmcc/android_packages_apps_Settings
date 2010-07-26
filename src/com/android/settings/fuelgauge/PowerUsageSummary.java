@@ -278,7 +278,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
             pref.setTitle(sipper.name);
             pref.setPercent(percentOfTotal);
             pref.setOrder(Integer.MAX_VALUE - (int) sipper.getSortValue()); // Invert the order
-            pref.setGaugeValue(percentOfMax);
+            pref.setGaugeValue(percentOfTotal); /* GPO: Something wrong in the subtotals, percentOfMax is visibly higher than percentOfTotal */
             if (sipper.uidObj != null) {
                 pref.setKey(Integer.toString(sipper.uidObj.getUid()));
             }
