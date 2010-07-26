@@ -107,6 +107,12 @@
                 style="?android:preferenceInformationStyle"
                 android:title="@string/firmware_version"
                 android:summary="@string/device_info_default"/>
+
+        <!-- Android Mod version -->
+        <Preference android:key="mod_version" 
+                style="?android:preferenceInformationStyle"
+                android:title="@string/mod_version"
+                android:summary="@string/device_info_default"/>
                 
         <!-- Device Baseband version -->
         <Preference android:key="baseband_version" 
