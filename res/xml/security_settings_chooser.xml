@@ -26,6 +26,13 @@
             android:summary="@string/unlock_set_unlock_launch_picker_summary"
             android:persistent="false"/>
 
+        <CheckBoxPreference
+            android:key="menu_key_unlock"
+            android:title="@string/menu_key_unlock_title"
+            android:summaryOn="@string/menu_key_unlock_on"
+            android:summaryOff="@string/menu_key_unlock_off"/>
+
+
     </PreferenceCategory>
 
 </PreferenceScreen>

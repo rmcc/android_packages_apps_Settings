@@ -625,6 +625,10 @@
     <!-- Label for ChoosePassword/PIN OK button -->
     <string name="lockpassword_cancel_label">Cancel</string>
 
+    <string name="menu_key_unlock_title">Allow MENU to unlock device</string>
+    <string name="menu_key_unlock_on">Pressing MENU will disable the keylock</string>
+    <string name="menu_key_unlock_off">Pressing MENU will have no effect on the keylock</string>
+
     <!-- In the security screen, the header title for settings related to device admins -->
     <string name="device_admin_title">Device administration</string>
 

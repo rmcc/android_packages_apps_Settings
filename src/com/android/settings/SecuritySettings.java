@@ -52,6 +52,7 @@ import com.android.internal.widget.LockPatternUtils;
  */
 public class SecuritySettings extends PreferenceActivity {
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
+    private static final String MENU_KEY_UNLOCK = "menu_key_unlock";
 
     // Lock Settings
     private static final String PACKAGE = "com.android.settings";
@@ -75,6 +76,7 @@ public class SecuritySettings extends PreferenceActivity {
     // Credential storage
     private CredentialStorage mCredentialStorage = new CredentialStorage();
 
+    private CheckBoxPreference mMenuUnlock;
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
     private CheckBoxPreference mAssistedGps;
@@ -133,6 +135,7 @@ public class SecuritySettings extends PreferenceActivity {
         // Lock screen
         if (!mLockPatternUtils.isSecure()) {
             addPreferencesFromResource(R.xml.security_settings_chooser);
+			mMenuUnlock = (CheckBoxPreference) getPreferenceScreen().findPreference(MENU_KEY_UNLOCK);
         } else {
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
@@ -256,6 +259,9 @@ public class SecuritySettings extends PreferenceActivity {
         } else if (preference == mAssistedGps) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSISTED_GPS_ENABLED,
                     mAssistedGps.isChecked() ? 1 : 0);
+        } else if (preference == mMenuUnlock) {
+            Settings.System.putInt(getContentResolver(), Settings.System.MENU_KEY_UNLOCK,
+                    mMenuUnlock.isChecked() ? 1 : 0);
         }
 
         return false;
@@ -275,6 +281,10 @@ public class SecuritySettings extends PreferenceActivity {
             mAssistedGps.setChecked(Settings.Secure.getInt(res,
                     Settings.Secure.ASSISTED_GPS_ENABLED, 2) == 1);
             mAssistedGps.setEnabled(gpsEnabled);
+        }
+        if (mMenuUnlock != null) {
+            mMenuUnlock.setChecked(Settings.System.getInt(res,
+                    Settings.System.MENU_KEY_UNLOCK, 0) == 1);
         }
     }
 
@@ -582,4 +592,5 @@ public class SecuritySettings extends PreferenceActivity {
                     .create().show();
         }
     }
+
 }
