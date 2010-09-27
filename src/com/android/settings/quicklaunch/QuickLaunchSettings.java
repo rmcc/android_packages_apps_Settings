@@ -178,7 +178,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
     }
     
     public void onClick(DialogInterface dialog, int which) {
-        if (mClearDialogShortcut > 0 && which == AlertDialog.BUTTON1) {
+        if (mClearDialogShortcut > 0 && which == AlertDialog.BUTTON_POSITIVE) {
             // Clear the shortcut
             clearShortcut(mClearDialogShortcut);
         }
@@ -204,7 +204,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
         return true;
     }
 
-    public boolean onItemLongClick(AdapterView parent, View view, int position, long id) {
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         
         // Open the clear shortcut dialog
         Preference pref = (Preference) getPreferenceScreen().getRootAdapter().getItem(position);
@@ -314,7 +314,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
             String intentUri = c.getString(intentColumn);
             PackageManager packageManager = getPackageManager();
             try {
-                Intent intent = Intent.getIntent(intentUri);
+                Intent intent = Intent.parseUri(intentUri, 0);
                 ResolveInfo info = packageManager.resolveActivity(intent, 0);
                 if (info != null) {
                     title = info.loadLabel(packageManager);
