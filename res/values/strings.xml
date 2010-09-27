@@ -1138,6 +1138,10 @@
     <string name="screen_timeout_summary">Adjust the delay before the screen automatically turns off</string>
     <!-- Sound & display settings screen, setting option name to change whether the screen adjusts automatically based on lighting conditions -->
     <string name="automatic_brightness">Automatic brightness</string>
+    <!-- Sound & display settings screen, allow overscroll -->
+    <string name="overscroll_title">List edges spring effect</string>
+    <string name="overscroll_summary_on">Scrolling overshoots and bounces back when flinging past the end</string>
+    <string name="overscroll_summary_off">Scrolling stops immediately when reaching the edge</string>
 
     <!-- SIM lock settings title -->
     <string name="sim_lock_settings">SIM card lock settings</string>

@@ -45,9 +45,11 @@ public class DisplaySettings extends PreferenceActivity implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_ANIMATIONS = "animations";
     private static final String KEY_ACCELEROMETER = "accelerometer";
+    private static final String KEY_OVERSCROLL = "overscroll";
 
     private ListPreference mAnimations;
     private CheckBoxPreference mAccelerometer;
+    private CheckBoxPreference mOverscroll;
     private float[] mAnimationScales;
 
     private IWindowManager mWindowManager;
@@ -64,6 +66,8 @@ public class DisplaySettings extends PreferenceActivity implements
         mAnimations.setOnPreferenceChangeListener(this);
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
+        mOverscroll = (CheckBoxPreference) findPreference(KEY_OVERSCROLL);
+        mOverscroll.setPersistent(false);
 
         ListPreference screenTimeoutPreference =
             (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
@@ -144,6 +148,9 @@ public class DisplaySettings extends PreferenceActivity implements
         mAccelerometer.setChecked(Settings.System.getInt(
                 getContentResolver(),
                 Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
+        mOverscroll.setChecked(Settings.System.getInt(
+                getContentResolver(),
+                Settings.System.ALLOW_OVERSCROLL, 1) != 0);
     }
 
     private void updateAnimationsSummary(Object value) {
@@ -165,6 +172,10 @@ public class DisplaySettings extends PreferenceActivity implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACCELEROMETER_ROTATION,
                     mAccelerometer.isChecked() ? 1 : 0);
+        } else if (preference == mOverscroll) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.ALLOW_OVERSCROLL,
+                    mOverscroll.isChecked() ? 1 : 0);
         }
         return true;
     }

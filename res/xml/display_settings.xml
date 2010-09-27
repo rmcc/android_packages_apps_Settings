@@ -41,4 +41,10 @@
                 android:persistent="false"
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
+
+        <CheckBoxPreference
+            android:key="overscroll"
+            android:title="@string/overscroll_title"
+            android:summaryOn="@string/overscroll_summary_on"
+            android:summaryOff="@string/overscroll_summary_off"/>
 </PreferenceScreen>
